@@ -26,7 +26,7 @@ class loader{
 				$_path = self::$namespaces[$_k] . str_replace('\\', '/', $_name[1]) . '.php';
 				//echo $_path;
 				if(file_exists($_path)) {
-					include $path;
+					include $_path;
 				}
 			}
 			
