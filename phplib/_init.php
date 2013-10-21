@@ -9,6 +9,11 @@
  * @version		$Id$
  */
 namespace phplib;
+
+if(defined('\\phplib\\VERSION')) {
+	return ;
+}
+
 if(version_compare(PHP_VERSION, '5.3.0', '<')) {
 	exit('php版本必须是5.3.0及以上');
 }
@@ -19,6 +24,50 @@ const AUTHOR = 'jellycheng';
 
 
 class phplib {
+
+	public static $_ENV;
+	
+	/**
+	 *
+	 * <code>
+	 *  \phplib\phplib::getEnv();
+	 *  \phplib\phplib::getEnv('abc');
+	 * </code>
+	 * @return mixed
+	 */
+	public static function getEnv($index = null) {
+		if(!self::$_ENV) {
+			self::$_ENV = new \stdClass();
+		}
+		
+		if($index) {
+			if(isset(self::$_ENV->$index)) {
+				return self::$_ENV->$index;
+			} else {
+				return null;
+			}
+		}
+		return self::$_ENV;
+	}
+	
+	/**
+	 *
+	 * <code>
+	 *  \phplib\phplib::setEnv($key, $val);
+	 *  \phplib\phplib::getEnv()->$key = $val;
+	 * </code>
+	 * @return object
+	 */
+	public static function setEnv($key, $val = null) {
+		if(!self::$_ENV) {
+			self::$_ENV = new \stdClass();
+		}
+		if(!$key) {
+			return false;
+		}
+		self::$_ENV->$key = $val;
+		return self::$_ENV;
+	}
 	
 	/**
 	 * 获取phplib目录
