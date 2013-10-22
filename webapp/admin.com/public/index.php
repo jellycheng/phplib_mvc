@@ -13,4 +13,8 @@ switch (ENVIRONMENT)
 
 //初始化框架
 require dirname(dirname(dirname(__DIR__))) . '/phplib/_init.php';
-\phplib\core\app::init(array('encoding'=>'utf-8'))->run();
+\phplib\core\webApp::init(array('encoding'=>'utf-8',
+								'var_mod'=>'mod',
+								'var_act'=>'act',
+								'default_timezone'=>'Asia/Shanghai',
+								))->run();
