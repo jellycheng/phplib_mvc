@@ -25,7 +25,7 @@ const AUTHOR = 'jellycheng';
 
 class phplib {
 
-	public static $_ENV;
+	protected static $_ENV;
 	
 	/**
 	 *
