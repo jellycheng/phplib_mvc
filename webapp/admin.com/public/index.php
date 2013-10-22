@@ -13,7 +13,4 @@ switch (ENVIRONMENT)
 
 //初始化框架
 require dirname(dirname(dirname(__DIR__))) . '/phplib/_init.php';
-
-//todo
-
-echo 'index todo...';
+\phplib\core\app::init(array('encoding'=>'utf-8'))->run();
