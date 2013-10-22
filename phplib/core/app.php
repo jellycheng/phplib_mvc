@@ -15,10 +15,25 @@
 namespace phplib\core;
 
 class app extends base {
+	
+	static $_app;
 
+	static function _init() {
 
+	}
+
+	static function _run() {
+		
+	}
+	
+	public static function createStatic(){
+		return new static();
+	}
 
 	static public function init($config=null) {
+		if(self::$_app) {
+			return self::$_app;
+		}
 		if(is_array($config)) {
 			$_config = $config;
 		} else if($config && is_string($config)) {
@@ -27,13 +42,18 @@ class app extends base {
 		if(isset($_config['default_timezone'])) {
 			date_default_timezone_set($_config['default_timezone']);
 		}
-		//todo
+
+		static::_init();
+		self::$_app = self::createStatic();
+		return self::$_app;
 	}
 
 
 	static public function run() {
 		//todo
-
+		echo 'rrr';
+		static::_run();
 	}
+
 
 }

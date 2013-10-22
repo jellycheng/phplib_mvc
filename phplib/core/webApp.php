@@ -12,6 +12,12 @@ namespace phplib\core;
 
 class webApp extends app {
 
-	
+	static function _init() {
+
+	}
+
+	static function _run() {
+		
+	}
 
 }
