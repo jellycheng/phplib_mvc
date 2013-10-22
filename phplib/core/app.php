@@ -18,15 +18,15 @@ class app extends base {
 	
 	static $_app;
 
-	static function _init() {
+	static protected function _init() {
 
 	}
 
-	static function _run() {
+	static protected function _run() {
 		
 	}
 	
-	public static function createStatic(){
+	static public function createStatic(){
 		return new static();
 	}
 
@@ -39,9 +39,13 @@ class app extends base {
 		} else if($config && is_string($config)) {
 			$_config = include $config;
 		}
-		if(isset($_config['default_timezone'])) {
+		\phplib\phplib::setEnv('config', $_config);
+		
+		if(!empty($_config['default_timezone'])) {
 			date_default_timezone_set($_config['default_timezone']);
 		}
+		
+		\phplib\phplib::setEnv('appClassName', get_called_class());
 
 		static::_init();
 		self::$_app = self::createStatic();
@@ -50,8 +54,7 @@ class app extends base {
 
 
 	static public function run() {
-		//todo
-		echo 'rrr';
+		
 		static::_run();
 	}
 

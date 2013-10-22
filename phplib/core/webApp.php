@@ -12,12 +12,15 @@ namespace phplib\core;
 
 class webApp extends app {
 
-	static function _init() {
-
+	static protected function _init() {
+		dispatcher::start();
 	}
 
-	static function _run() {
+	static protected function _run() {
 		
+		$mod = \phplib\phplib::getEnv('mod');
+		$act = \phplib\phplib::getEnv('act');
+		echo "mod={$mod} act={$act}   todo...";
 	}
 
 }

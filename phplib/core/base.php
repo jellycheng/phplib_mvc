@@ -11,6 +11,7 @@
 namespace phplib\core;
 
 class base {
+	
 
 	/**
 	 * 魔术方法
