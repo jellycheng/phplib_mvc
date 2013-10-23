@@ -1,7 +1,7 @@
 <?php
 /**
  * phplib\core\base.php
- * 基础累
+ * 基础类
  *
  * @copyright	(c) 2013-2099 All Rights Reserved
  * @author		jellycheng <42282367@qq.com>
