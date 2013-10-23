@@ -30,7 +30,7 @@ class loader{
 				}
 			}
 			
-			if(!class_exists($classname, false)) {
+			if(!class_exists($classname, false) && !interface_exists($classname, false)) {
 				if(function_exists('__autoload')) {
 					__autoload($classname);
 				} else if(function_exists('app_custom_autoload')) {
