@@ -26,4 +26,8 @@ class base {
 		/* code */
 	}
 
+	public static function className() {
+		return get_called_class();
+	}
+
 }
