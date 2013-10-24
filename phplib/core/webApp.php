@@ -42,7 +42,8 @@ class webApp extends app {
 			$className = rtrim($_controller_namespace, '\\') . '\\' . $className;
 			$_obj = new $className();
 			//$_obj->$act();
-			call_user_func(array(&$_obj,$act));
+			$act .= 'Act';
+			call_user_func(array(&$_obj, $act));
 		} else {
 			#404 todo
 			
