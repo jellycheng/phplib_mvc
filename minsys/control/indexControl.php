@@ -6,8 +6,8 @@ use phplib\core\control;
 class indexControl extends control {
 
 	
-	public function index() {
-		echo __FILE__;
+	public function indexAct() {
+		echo 'welcome use phplib_mvc!~';
 	
 	}
 }
