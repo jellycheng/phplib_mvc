@@ -1,2 +1,2 @@
 <?php
-require './webapp/admin.com/public/index.php';
+require './minsys/public/index.php';
