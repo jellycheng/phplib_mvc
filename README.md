@@ -26,7 +26,7 @@ phplib+mvc思想，开发的开源项目，phplib也是一个php框架哦。<br 
  * |-doc   存放文档
  * |-phplib 代码核心、灵魂、框架、类库、方法助手等，均在phplib命名空间下。尽量避免define定义常量，而使用const定义常量
  * |-webapp 应用程序目录，网站，后台，统一认证接口等，每个域名document_root指到本域名的public目录 如webapp/admin.com/public(也可不这样使用哦)
- * |-
+ * |-minsys 小型系统、网站构建，参考
 
 
 ##【备注】##
