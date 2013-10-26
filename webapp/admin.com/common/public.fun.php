@@ -8,3 +8,13 @@
  * @created		2013-10-23
  * @version		$Id$
  */
+
+/**
+ * app自动查找类 加载
+ * @param $className
+ */
+function app_custom_autoload($className) {
+    echo 'todo, className:' . $className;
+
+}
+

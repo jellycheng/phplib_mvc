@@ -58,5 +58,17 @@ class app extends base {
 		static::_run();
 	}
 
+    static public function load_ext_file($file = '') {
+        $files = array();
+        if(is_string($file) && file_exists($file)) {
+            $files = include $file;
+        } else if(!is_array($file)) {
+            return false;
+        }
+        foreach ($files as $_f) {
+            if(file_exists($_f)) include_once $_f;
+        }
+        return true;
+    }
 
 }

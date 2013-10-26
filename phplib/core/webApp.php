@@ -13,6 +13,11 @@ namespace phplib\core;
 class webApp extends app {
 
 	static protected function _init() {
+        $_config = \phplib\phplib::getEnv('config');
+        //加载动态项目公共文件
+        if(isset($_config['init_load_file']) && $_config['init_load_file']) {
+            self::load_ext_file($_config['init_load_file']);
+        }
 		dispatcher::start();
 		
 	}
@@ -36,7 +41,7 @@ class webApp extends app {
 			$className = $mod . 'Control';
 		}
 		
-		$_file = APP_ROOT . "control/{$partFileName}Control.php";
+		$_file = APP_CONTROL_PATH . "{$partFileName}Control.php";
 		if(file_exists($_file)) {
 			include $_file;
 			$className = rtrim($_controller_namespace, '\\') . '\\' . $className;
@@ -46,7 +51,7 @@ class webApp extends app {
 			call_user_func(array(&$_obj, $act));
 		} else {
 			#404 todo
-			
+			echo '404 not found...';
 		}
 
 	}

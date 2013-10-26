@@ -10,11 +10,15 @@ switch (ENVIRONMENT)
 			ini_set('display_errors', 1);
 		break;
 }
+#app目录常量
+define('APP_ROOT', dirname(__DIR__) . '/');
+define('APP_COMMON_PATH', APP_ROOT . 'common/');
+define('APP_CONFIG_PATH', APP_ROOT . 'config/');
+define('APP_CONTROL_PATH', APP_ROOT . 'control/');
+define('APP_DATA_PATH', APP_ROOT . 'data/');
+define('APP_MODEL_PATH', APP_ROOT . 'model/');
+define('APPCOMMON_PATH', dirname(APP_ROOT) . '/appcommon/');
 
 //初始化框架
 require dirname(dirname(dirname(__DIR__))) . '/phplib/_init.php';
-\phplib\core\webApp::init(array('encoding'=>'utf-8',
-								'var_mod'=>'mod',
-								'var_act'=>'act',
-								'default_timezone'=>'Asia/Shanghai',
-								))->run();
+\phplib\core\webApp::init(require APP_ROOT . 'config/config.php')->run();
