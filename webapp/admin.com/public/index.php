@@ -18,7 +18,9 @@ define('APP_CONTROL_PATH', APP_ROOT . 'control/');
 define('APP_DATA_PATH', APP_ROOT . 'data/');
 define('APP_MODEL_PATH', APP_ROOT . 'model/');
 define('APPCOMMON_PATH', dirname(APP_ROOT) . '/appcommon/');
-
+$_startTime = microtime(true); 
 //初始化框架
 require dirname(dirname(dirname(__DIR__))) . '/phplib/_init.php';
 \phplib\core\webApp::init(require APP_ROOT . 'config/config.php')->run();
+
+echo "耗时： " . (microtime(true) - $_startTime) . "s";
