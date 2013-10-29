@@ -9,7 +9,6 @@
  * @version		$Id$
  */
 require '../phplib/_init.php';
-require_once '../phplib/loader/loader.php';
 
 define('APP_ROOT', __DIR__ . '/');
 $smarty = phplib\tpl\tplFactory::factory('smarty');
