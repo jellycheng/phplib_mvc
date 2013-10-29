@@ -17,5 +17,6 @@ function app_custom_autoload($cls) {
 	echo $cls . __FILE__;
 }
 */
-
-new \phplib\a\ab();
+define('DEBUG', true);
+$emptyClsObj = new \phplib\util\emptyCls();
+$emptyClsObj->emptyMethod();
