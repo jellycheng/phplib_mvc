@@ -7,7 +7,10 @@
  * @created		2013-10-22
  * @version		$Id$
  */
-//加载smarty todo
+namespace phplib\tpl;
+
+//加载smarty
+require_once \phplib\phplib::getPhplibPath() . 'third/Smarty/SmartyBC.class.php';
 
 class smartyTpl extends \SmartyBC {
     
@@ -30,14 +33,14 @@ class smartyTpl extends \SmartyBC {
         parent::assign($tplVar, $value, $nocache);
     }
     
-    public function display($tplFile) {
-        $tplFile = substr($tplFile, -4)=='.php' ? $tplFile : $tplFile . '.tpl.php';
-        return parent::fetch($tplFile);
+    public function display($tplFile = null, $cache_id = null, $compile_id = null, $parent = null) {
+        $tplFile = substr($tplFile, -4)=='.tpl' ? $tplFile : $tplFile . '.tpl';
+        return parent::display($tplFile, $cache_id, $compile_id, $parent);
     }
     
-    public function fetch($tplFile) {
-        $tplFile = substr($tplFile, -4)=='.php' ? $tplFile : $tplFile . '.tpl.php';
-        return parent::fetch($tplFile);
+    public function fetch($tplFile = null, $cache_id = null, $compile_id = null, $parent = null, $display = false, $merge_tpl_vars = true, $no_output_filter = false) {
+        $tplFile = substr($tplFile, -4)=='.tpl' ? $tplFile : $tplFile . '.tpl';
+        return parent::fetch($tplFile, $cache_id, $compile_id, $parent, $display, $merge_tpl_vars, $no_output_filter);
     }
     
 }
