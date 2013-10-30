@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <meta name="viewport" content="user-scalable=no, initial-scale=0.5"/>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  <title> phplib_mvc框架使用教程 </title>
+	  <meta name="Generator" content="EditPlus">
+	  <meta name="Author" content="">
+	  <meta name="Keywords" content="">
+	  <meta name="Description" content="">
+	  <style>
+		::selection{ background-color: #E13300; color: white; }
+		::moz-selection{ background-color: #E13300; color: white; }
+		::webkit-selection{ background-color: #E13300; color: white; }
+		body {
+				background-color: #fff;
+				margin: 40px;
+				font: 12px    /20px normal Helvetica, Arial, sans-serif;
+				color: #4F5155;
+			}
+			a {
+				color: #003399;
+				background-color: transparent;
+				font-weight: normal;
+			}
+	  code {
+				font-family: Consolas, Monaco, Courier New, Courier, monospace;
+				font-size: 12px;
+				background-color: #f9f9f9;
+				border: 1px solid #D0D0D0;
+				color: #002166;
+				display: block;
+				margin: 14px 0 14px 0;
+				padding: 12px 10px 12px 10px;
+				margin-left: 20px;
+			}
+		h1 {
+				color: #444;
+				background-color: transparent;
+				border-bottom: 1px solid #D0D0D0;
+				font-size: 19px;
+				font-weight: normal;
+				margin: 0 0 24px 0;
+				padding: 14px 15px 10px 15px;
+			}
+			.step {
+				padding-left: 15px
+			}
+			.content{
+				margin-left: 25px;
+			}
+	  </style>
+	</head>
+ <body>
+<div style="text-align:center;font-size: 18px;">phplib_mvc框架使用教程</div>
+<code>
+	文档制作与开发者:<br/>
+		英文ID:jellycheng<br/>
+		中文名字：程金盛<br/>
+		部门：电商平台部<br/>
+		代码访问地址: <a href="https://github.com/jellycheng/phplib_mvc" target="_blank">https://github.com/jellycheng/phplib_mvc</a><br/>
+</code>
+<h1>框架简介</h1>
+<p class="content">phplib + mvc思想，开发的开源项目，phplib也是一个php框架哦，轻量级、大众化、简单、易用,初始化文件少。<br>
+适合在windows、linux、mac系统上运行。<br>
+phplib不用关心具体的业务逻辑和实现，就像一个零部件厂商，根据规格制造相应的模具、螺丝等工具，不用关心制造出来的螺丝去造飞机、轮船还是汽车等。 <br>
+phplib中代码使用到单例、工厂等模式。 <br>
+具体的应用使用可以参考minsys和webapp目录的代码。<br>
+</p>
+
+ <h1>运行环境要求</h1>
+ <p class="step">1) <font color=red>php 5.3</font>及以上版本( 原因: 框架使用php5.3新特性开发的一套框架, 大家都知道,php5.3比php5.2版本在性能上有很大的提高(包括内存处理, cpu使用率等))</p>
+ <p class="step">2) 常用php扩展:json,mbstring,libxml,openssl,pcntl,session,SimpleXML,xml,zip,zlib,date,gd,iconv等常用扩展, 如果使用curl发起get,post等请求,需要安装php curl扩展</p>
+ <p class="step">3) web server容器(apache,nginx)没有特别要求,一般的版本均符合.</p>
+
+ <h1>框架目录结构</h1>
+<p class="step">1) 整体目录结构</p>
+<p class="content"><pre>
+	|-batch 存放脚本,代码生成等,减少开发工作,辅助开发人员开发,提高开发速度
+	|-demo 存放phplib目录中代码使用例子,如get请求如何使用可查看getCurl.php
+		|-getCurl.php get请求例子
+		|-postCurl.php post请求例子
+		|-gpc.php 响应给post的数据, 测试用
+		|-smarty.php 框架如何使用smarty模板引擎
+	|-doc 存放各种文档(开发, 测试等)
+	|-phplib 框架目录(phplib目录名可以任意更改,phplib中代码不依赖), 是代码核心、灵魂、类库、方法助手等，均在phplib命名空间下。尽量避免define定义常量，而使用const定义常量( <font color=red>define方法与const的区别可查看<a href="http://km.oa.com/articles/show/176800" target="_blank">http://km.oa.com/articles/show/176800</a></font>).
+	|-webapp 大型网站系统目录,后面做目录讲解,适合多子站的系统,有公用代码逻辑复用的.
+	|-minsys 小型系统、网站构建,后面做目录讲解
+</pre>
+</p>
+<p class="step">2) phplib目录结构 </p>
+<code> 
+<pre>
+	phplib目录下命名规范: 目录名均小写, 类名对应命名空间下文件名.php 如\phplib\curl\getCurl类对应的文件目录就是phplib/curl/getCurl.php, 对应的命名空间是(\phplib\curl)(好处: 方便自动加载器查找加载)
+
+	captcha 封装验证码的类库, 目前没有封装
+	core  框架核心文件, 创建站点是使用,后面讲解
+	curl  是封装http,https协议的get,post请求, 使用方法参考demo/getCurl.php和demo/postCurl.php 文件
+	db    数据库类封装,mysql,mysqli,pdo等
+	exception  基础异常类
+	file	文件操作类
+	loader	php加载器目录
+	log	日志目录类封装
+	nosql   nosql类封装(cmem, memcached,redis,tt/tc等)
+	session 回话类封装
+	third   存放第三方类库,如smarty等
+	tpl		模板类封装, mvc思想的v层类实现,
+	util    框架助手类,助手方法等封装
+	_init.php  框架入口, 要使用本框架,<font color=red>只需要加载文本件接口(require '../phplib/_init.php';), 多次加载不会有问题, 内部做了兼容控制. </font>
+	<font color=green>_init.php本文件只做2件事情: 1. 定义类\phplib\phplib  2. 加载php loader自动加载器:require_once \phplib\phplib::getPhplibPath() . 'loader/loader.php';</font>
+	<font color=red>loader/loader/loader.php加载器实现思路:
+		1. 通过命名空间目录对应的目录查找指定的类/接口文件
+			注册命名空间对应的目录绝对地址方法: \phplib\loader\loader::registerNamespace('命名空间名', '绝对目录'); 
+			如:\phplib\loader\loader::registerNamespace('phplib', \phplib\phplib::getPhplibPath());
+			   \phplib\loader\loader::registerNamespace('app', '/var/www/xxx');
+		2. 如果通过上面1步骤未找到指定的类文件 则当存在__autoload方法则通过子站实现的__autoload方法查找类, 否则存在app_custom_autoload($classname)方法则使用改方法查找类(由子站自定义自动查找加载类).
+	</font>
+</pre>
+</code>
+<p class="step">3) webapp大型网站系统目录结构：</p>
+<code> 
+<pre>
+	admin.com 是子站域名,目录名可任意名称更改 如w.xxx.com, sq.xxx.com
+		|-common  一般放置子站通用方法,类等业务相关的封装,如public.fun.php
+		|-config 子站配置文件,支持配置文件环境隔离
+			|-dev 开发环境中使用的配置文件目录
+			|-beta 是beta环境配置文件目录
+			|-idc  是生产环境配置文件目录
+			|-config.php 不区分环境的配置文件
+		|-control 控制器类, url参数中mod=xxx 对应这里的xxxControl.php文件,类名为xxxControl  url中参数act=index对应xxxControl类中的indexAct方法  
+			|- indexControl.php  默认控制器
+		|-data 目录必须是可读可写,存放各种文件缓存、log等
+		|-model 子站业务模型、功能模块封装，便于控制器类调用
+		|-public
+			|-index.php cgi入口, 域名配置的document_root指到这里.如nginx配置例子root   /path/to/admin.com/public;
+		|-template  存放html模板，使php代码与html进行模板分离
+		|-third  子站要使用的第三方类库、方法等
+		
+	appcommon 各子站公用业务逻辑、配置等
+		|-common 一般放置通用方法,类等业务相关的封装,如public.fun.php
+		|-config 项目配置文件,支持配置文件环境隔离
+			|-dev 开发环境中使用的配置文件目录
+			|-beta 是beta环境配置文件目录
+			|-idc  是生产环境配置文件目录
+			|-config.php 不区分环境的配置文件		
+		|-model  业务模型、功能模块封装，便于控制器类调用
+		|-_init.php 公用常量、php代码文件初始化加载等
+	w.xxx.com 其实跟上面amdin.com目录结构一样
+	xxx.xxx.com其实跟上面amdin.com目录结构一样
+</pre>
+</code>
+<p class="step">4) 开发一个控制器：http://localhost/index.php?mod=index&act=index&ab=123</p>
+<code> 
+<pre>
+	url地址对应的控制器类是admin.com/control/indexControl.php文件内容如下: 整个控制器执行完大约耗时： 0.0040500164031982s 这是我公司办公电脑执行时间,如果再配上apc加速器或者在idc机器上跑会更快
+	< ?php
+	namespace app\control;
+	use phplib\core\control;
+	class indexControl extends control {
+		public function _init() {
+			//初始化通用逻辑
+		}
+		public function indexAct() {
+			echo 'welcome use phplib_mvc!~';
+			echo $this->_get('ab'); //打印get参数值  ,另外调用方式$this->_get('get参数', '过滤方法', '默认值');
+			//获取post值$this->_post('post参数', '过滤方法', '默认值');
+			//获取$_SERVER值$this->_server('参数', '过滤方法', '默认值');
+			//获取$_COOKIE值$this->_cookie('参数', '过滤方法', '默认值');
+			//获取全局变量值$this->_globals('参数', '过滤方法', '默认值');
+			print_r(get_included_files()); //打印加载的所有文件list
+			print_r(\phplib\phplib::getEnv()); //打印全局配置
+		}
+	}
+</pre>
+</code>
+<p class="step">5) admin.com\config\config.php项目配置和core.php文件讲解</p>
+<code> 
+<pre>
+admin.com\config\config.php项目配置如下: 子站全局配置
+/**
+ * 配置key均小写
+ */
+return array(
+		'encoding'=>'utf-8',#编码
+		'default_timezone'=>'Asia/Shanghai', #时区
+		'controller_namespace'=>'\\app\\control', #控制器使用的命名空间
+		/* 系统变量名称设置 */
+		'var_mod'=>'mod',  #url中mod参数名
+		'var_act'=>'act',  #url中act参数名,
+		'var_pathinfo'=> 's', #为后面支持统一重写规则而设计的
+			
+
+            /** other */
+            'init_load_file'=>APP_ROOT . 'config/core.php',  #初始化要加载的核心文件
+);
+			
+core.php文件内容如下: 用于自定义项目初始加载的核心文件 
+return array(
+            \phplib\phplib::getPhplibPath() . 'util/util.php',
+            APPCOMMON_PATH . '_init.php',
+            APP_COMMON_PATH . 'public.fun.php',
+);
+</pre>
+</code>
+
+<p class="step">6) 不使用webapp目录结构,又要使用phplib框架代码,例子参数demo目录下的文件</p>
+<code> 
+<pre>
+	这里做一个get请求例子demo: demo/getCurl.php
+	require '../phplib/_init.php'; #加载框架初始化
+	$apiUrl = 'http://www.qq.com'; #要请求的地址
+	$getCurl = new \phplib\curl\getCurl(); #实例化get对象
+	$result = $getCurl->request($apiUrl);  #请求并获取返回内容
+	echo $result; #打印响应结果
+
+</pre>
+</code> 
+ </body>
+</html>
