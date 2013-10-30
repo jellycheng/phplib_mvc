@@ -1,13 +1,16 @@
 phplib_mvc
 ==========
 
-phplib+mvc思想，开发的开源项目，phplib也是一个php框架哦。<br />
+phplib+mvc思想，开发的开源项目，phplib也是一个php框架哦，轻量级、大众化、简单、易用。<br />
 适合在windows、linux、mac系统上运行。<br />
-打造简单、易用、傻瓜化、智能化框架&平台
+打造简单、易用、傻瓜化、智能化框架&平台 <br />
+phplib不用关心具体的业务逻辑和实现，就像一个零部件厂商，根据规格制造相应的模具、螺丝等工具，不用关心制造出来的螺丝去造飞机、轮船还是汽车等。 <br />
+phplib中代码使用到单例、工厂等模式。
+具体的应用使用可以参考minsys和webapp目录的代码。 <br />
 
 
 ##【环境要求】 ##
-- php 5.3及以上版本（依赖php扩展curl, mysql,mbstring等） <br />
+- php 5.3及以上版本（依赖php扩展curl, mysql,mbstring，gd等） <br />
 - mysql 5.0及以上版本 <br />
 - nginx 0.6.0及以上版本 <br />
 - apache 2.2及以上版本 <br />
