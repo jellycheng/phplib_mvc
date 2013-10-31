@@ -13,9 +13,11 @@ namespace phplib\tpl;
 require_once dirname(__FILE__).'/tplAbstract.php';
 
 class phpTpl extends tplAbstract {
+	
+	protected $template_dir;
 
     public function __construct() {
-
+		$this->template_dir = $this->normalizeDirectory(APP_ROOT) . 'template/';
     }
     
     public function assign($key, $var=null) {
@@ -29,14 +31,31 @@ class phpTpl extends tplAbstract {
     }
 
     public function display($tplFile) {
-        //todo
-		
+        $tplFile = substr($tplFile, -4)=='.php' ? $tplFile : $tplFile . '.tpl.php';
+		$tplFile = $this->template_dir . $tplFile;
+		if(file_exists($tplFile)) {
+			extract($this->data, EXTR_OVERWRITE);
+			include $tplFile;
+		} else if(defined('DEBUG_TPL')){
+			exit('模板文件未找到: ' . $tplFile);
+		}
+
     }
 
     public function fetch($tplFile) {
 		//todo
         return '';
     }
-    
+
+	protected function normalizeDirectory($directory) {
+		$last = $directory[strlen($directory) - 1];
+		if (in_array($last, array('/', '\\'))) {
+			$directory[strlen($directory) - 1] = DIRECTORY_SEPARATOR;
+			return $directory;
+		}
+		$directory .= DIRECTORY_SEPARATOR;
+		return $directory;
+	}
+
 }
 
