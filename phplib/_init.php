@@ -36,10 +36,6 @@ class phplib {
 	 * @return mixed
 	 */
 	public static function getEnv($index = null) {
-		if(!self::$_ENV) {
-			self::$_ENV = new \stdClass();
-		}
-		
 		if($index) {
 			if(isset(self::$_ENV->$index)) {
 				return self::$_ENV->$index;
@@ -59,9 +55,6 @@ class phplib {
 	 * @return object
 	 */
 	public static function setEnv($key, $val = null) {
-		if(!self::$_ENV) {
-			self::$_ENV = new \stdClass();
-		}
 		if(!$key) {
 			return false;
 		}
@@ -95,6 +88,13 @@ class phplib {
 		return \phplib\VERSION;
 	}
 
+	public static function init() {
+        if (!self::$_ENV) {
+            self::$_ENV = new \stdClass();
+        }
+    }
+
 }
+\phplib\phplib::init();
 
 require_once \phplib\phplib::getPhplibPath() . 'loader/loader.php';
